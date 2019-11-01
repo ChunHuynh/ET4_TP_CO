@@ -31,11 +31,6 @@ public abstract class Item {
      */
     public Position position() { return new Position(this.p.x(), this.p.y());}
 
-    public void setPosition(double newX, double newY){
-        p.setX(newX);
-        p.setY(newY);
-    }
-
     /**
      * Deplace position (x,y) par (dx,dy)
      * @param dx: deplacement en x
