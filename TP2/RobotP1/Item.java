@@ -1,5 +1,3 @@
-package com.robot;
-
 public abstract class Item {
 
     private double masse;
@@ -23,6 +21,8 @@ public abstract class Item {
     public int niveau() { return this.niveau; }
 
     public double masse() { return this.masse; }
+
+    public void setMasse(double newMasse) { masse = newMasse;}
 
     public int id() { return this.id; }
 

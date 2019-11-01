@@ -1,5 +1,3 @@
-package com.robot;
-
 import java.util.ArrayList;
 
 public class Piece {

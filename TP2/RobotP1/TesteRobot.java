@@ -1,5 +1,3 @@
-package com.robot;
-
 public class TesteRobot {
 
     public static void main(String [] args) throws ErreurRobot {
@@ -8,10 +6,10 @@ public class TesteRobot {
 	Caisse c1, c2, c3;
 	Robot r1, r2, r3;
 
-	s1 = new Sac(100, 0.02, new Position (10.0, 10.0)); r.placer(s1);
-	s2 = new Sac(400, 0.01, new Position (20.0, 20.0)); r.placer(s2);
-	s3 = new Sac(10, 0.01); r.placer(s3);
-	s4 = new Sac(10, 0.0); r.placer(s4);
+	s1 = new SacDeSable(100, 0.02, new Position (10.0, 10.0)); r.placer(s1);
+	s2 = new SacDeSable(400, 0.01, new Position (20.0, 20.0)); r.placer(s2);
+	s3 = new SacDeSable(10, 0.01); r.placer(s3);
+	s4 = new SacDeSable(10, 0.0); r.placer(s4);
 
 	c1 = new Caisse(20, new Position (20.0, 0.0)); r.placer(c1);
 	c2 = new Caisse(200, new Position (30.0, 0.0)); r.placer(c2);

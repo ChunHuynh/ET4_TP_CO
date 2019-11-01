@@ -1,5 +1,3 @@
-package com.robot;
-
 import java.util.ArrayList;
 
 public class Robot extends Item {
@@ -52,29 +50,18 @@ public class Robot extends Item {
         else if ( (i.masseTotale()+this.masseTotale()) > this.chargeMax())
             throw new ErreurRobot("Le robot sera en surcharge!");
         else{
-            i.setPosition(this.position().x(), this.position().y()); // Deplace l'item à charger
+            i.movePosition(position().x()-i.position().x(), position().y()-i.position().y());
             i.levelUp();
-            if (i instanceof Robot){    // Augmente le niveau et deplace les items qu'il porte
-                for (Item item:((Robot) i).rCharge) {
-                    item.levelUp();
-                    item.setPosition(this.position().x(), this.position().y());
-                }
-            }
             rCharge.add(i);
         }
     }
 
     public void decharger(Item i) throws ErreurRobot {
-        // TODO: Condition de déchargement
         if (this.niveau() != 0.0)
             throw new ErreurRobot("Le robot ne peux pas décharger, il est porté!");
         else{
             rCharge.remove(i); // TODO: Should probably check if true/false to avoid levelDown not removed item
             i.levelDown();
-            if (i instanceof Robot){    // Diminue le niveau des items qu'il porte
-                for (Item item:((Robot) i).rCharge)
-                    item.levelDown();
-            }
         }
     }
 
@@ -89,15 +76,28 @@ public class Robot extends Item {
             transport += "-----";
         }else{ transport = "";}
 
-        return String.format("%-6s %3d", "Robot", id()) + String.format(", %s: %5.1f", "Masse", masse()) + ", Position " + this.position().toString() + ", Niveau " + niveau()
-                + transport;
+        return String.format("%-10s %3d", "Robot", id()) + 
+        	   String.format(", %s: %5.1f", "Masse", masse()) + 
+        	   ", Position " + this.position().toString() + 
+        	   ", Niveau " + niveau() + 
+        	   String.format(", %s: %5.1f", "Charge actuelle", charge()) + 
+               transport;
     }
 
-    /* pas nécessaire à mon avis
     @Override
-    public void levelUp(){ this.niveau += 1;}
+    public void levelUp(){ 
+    	super.levelUp(); 		 // +1 au robot
+    	for (Item item:rCharge){ // +1 aux items portés et les déplace
+    		item.levelUp();
+    		item.movePosition(position().x()-item.position().x(), position().y()-item.position().y());
+    	}
+    }
 
     @Override
-    public void levelDown(){ this.niveau += 1;}
-    */
+    public void levelDown(){ 
+    	super.levelDown();		// -1 au robot
+    	for (Item item:rCharge) // -1 aux items portés
+    		item.levelDown();
+    }
+
 }

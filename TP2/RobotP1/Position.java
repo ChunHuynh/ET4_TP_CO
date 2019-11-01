@@ -1,5 +1,3 @@
-package com.robot;
-
 public class Position {
     private double x, y;
     private static Position defaultPosition = new Position(0.0, 0.0);
@@ -25,7 +23,7 @@ public class Position {
     public void setY(double newY) {y = newY;}
 
     public void move(double dx, double dy) {
-        x += dx; // TODO: should check if illegal move(negative, origin...) (?)
+        x += dx; // TODO: vérifier que ce n'est pas un mouvement illégal (?)
         y += dy;
     }
 
