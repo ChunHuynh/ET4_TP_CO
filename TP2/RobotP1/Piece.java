@@ -14,10 +14,20 @@ public class Piece {
     }
 
     public void placer(Item i) throws ErreurRobot {
-        itemz.add(i);
+        if(i.isPlaced())
+			throw new ErreurRobot ("L'objet est deja place !");
+		else {
+			itemz.add(i);
+			i.setPlaced();
+		}
     }
 
     public void enlever(Item i) throws ErreurRobot {
-        itemz.remove(i);
+        if(!itemz.contains(i))
+			throw new ErreurRobot ("L'objet n'existe pas dans la piece !");
+		else{
+			itemz.remove(i);
+			i.clearPlaced();
+		}
     }
 }

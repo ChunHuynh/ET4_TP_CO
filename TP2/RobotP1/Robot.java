@@ -29,16 +29,19 @@ public class Robot extends Item {
         return this.masse() + this.charge();
     }
 
+    @Override 
+	public void movePosition(double dx, double dy){
+		super.movePosition(dx,dy);
+		for (Item i : rCharge){
+			i.movePosition(dx, dy);
+		}
+	}
+
     public void deplacer(double dx, double dy) throws ErreurRobot {
-        // TODO
-        movePosition(dx,dy);    // Deplace le robot
-        if (rCharge != null) {  // Deplace les items portés
-            for (Item i : rCharge) {
-                if (i instanceof Robot) // le robot porte un autre robot
-                    ((Robot) i).deplacer(dx, dy);
-                else
-                    i.movePosition(dx,dy);
-            }
+		if (niveau() != 0.0)
+            throw new ErreurRobot("Le robot a deplacer n'est pas au niveau 0!");
+		else{
+			movePosition(dx,dy);    // Deplace le robot
         }
     }
 
@@ -58,9 +61,11 @@ public class Robot extends Item {
 
     public void decharger(Item i) throws ErreurRobot {
         if (this.niveau() != 0.0)
-            throw new ErreurRobot("Le robot ne peux pas décharger, il est porté!");
+            throw new ErreurRobot("Le robot ne peux pas decharger, il est porte!");
+		else if (!(rCharge.contains(i)))
+			throw new ErreurRobot("Le robot decharge un objet qu'il ne porte pas !");
         else{
-            rCharge.remove(i); // TODO: Should probably check if true/false to avoid levelDown not removed item
+            rCharge.remove(i);
             i.levelDown();
         }
     }

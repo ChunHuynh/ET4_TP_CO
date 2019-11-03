@@ -4,7 +4,10 @@ public abstract class Item {
     private Position p;
     private int id;
     private int niveau;
+
     private static int lastId = 0;
+
+    private boolean placed;
 
     protected Item(double masse, Position p) {
         this.masse = masse;
@@ -12,17 +15,24 @@ public abstract class Item {
         this.niveau = 0;
         lastId++;
         this.id = lastId;
+        placed = false;
     }
 
     public void liste() {
         System.out.println(this.toString());
     }
 
+    public boolean isPlaced() { return placed; }
+
+	public void setPlaced() { placed = true; }
+	
+	public void clearPlaced() { placed = false; }
+
     public int niveau() { return this.niveau; }
 
     public double masse() { return this.masse; }
 
-    public void setMasse(double newMasse) { masse = newMasse;}
+    public void setMasse(double newMasse) { masse = newMasse; }
 
     public int id() { return this.id; }
 

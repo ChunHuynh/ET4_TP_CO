@@ -1,3 +1,5 @@
+import java.lang.Math;
+
 public class Sac extends Item {
 
     protected double perte; /* taux de perte */
@@ -12,6 +14,13 @@ public class Sac extends Item {
 	    this.perte = perte;
 	    this.masseInitiale = masse;
     }
+
+    @Override
+	public void movePosition(double dx, double dy){
+		double dist = Math.hypot(dx, dy);
+	 	setMasse(masse() * (1.0-perte*dist));
+		super.movePosition(dx, dy);
+	}
 
     @Override
     public String toString() {  return String.format("%-10s %3d", "Sac", id()) +
